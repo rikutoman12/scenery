@@ -1,0 +1,6 @@
+<h1>TODOアプリ</h1>
+<% if logged_in? %>
+  <%= render 'mains/logged_in' %>
+<% else %>
+  <%= render 'mains/not_logged_in' %>
+<% end %>

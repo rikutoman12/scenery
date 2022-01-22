@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
-  helper_mathod :current_user
+
+
     def login?
         if current_user.nil?
             redirect_to login_path, alert: "you have to login"

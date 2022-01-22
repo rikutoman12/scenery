@@ -1,20 +1,22 @@
 class SessionsController < ApplicationController
+  before_action :already_login?, except: :destroy
   def new
   end
   
   def create
-    user = User.find_by(email: params[:session][:email].downcase)
-    if user && user.authenticate(params[:session][:password])
-      log_in user
-      redirect_to root_url
+    user = User.find_by_email(params[:email])
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect_to user_path, notice: "you have successfully login"
     else
-      render 'new'
+      flash.now[:alert] = "Email or Password is invalid"
+      render :new
     end
   end
   
   def destroy
-    log_out if logged_in?
-    redirect_to root_url
+    session[:user_id] = nil
+    redirect_to root_path, notice: "you have successfully logout"
   end
   
   private

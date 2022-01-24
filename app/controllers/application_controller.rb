@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-
+    helper_method :current_user
 
     def login?
         if current_user.nil?

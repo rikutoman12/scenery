@@ -1,0 +1,8 @@
+
+<% @post_images.each do |post_image| %>
+
+  <%= attachment_image_tag post_image, :image %>
+  場所：<%= post_image.name %>
+  説明：<%= post_image.caption %>
+
+<% end %>

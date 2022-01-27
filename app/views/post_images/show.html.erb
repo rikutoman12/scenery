@@ -1,4 +1,27 @@
-<div>
-  <%= attachment_image_tag @post_image, :image %>
-  <p>ショップ名：<%= @post_image.name %></p>
-  <p>説明：<%= @post_image.caption %></p>
+<div class=container>
+  <div class="row">
+    <div class ="m-2">
+      <div class="table-bordered" >
+        <%= attachment_image_tag @post_image, :image, :size =>'300x260' %>
+        <div class="text-center">
+          <p>場所：<%= @post_image.name %></p>
+          <p>説明：<%= @post_image.caption %></p>
+        </div>
+        <%= link_to "編集",edit_post_image_path(@post_image) %>
+        <%= link_to "削除",post_image_path(@post_image),method: :delete  %>
+        <%= link_to "一覧画面",post_images_path %>
+      </div>
+    </div>
+    <div>
+      <% @post_image.post_comments.each do |post_comment| %>
+        <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
+      <% end %>
+    </div>
+    <div>
+      <%= form_with(model:[@post_image, @post_comment], local: true) do |f| %>
+        <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
+        <%= f.submit "送信する" %>
+      <% end %>
+    </div>
+  </div>
+</div>

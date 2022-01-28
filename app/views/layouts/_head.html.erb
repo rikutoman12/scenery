@@ -6,11 +6,9 @@
     <ul class="navbar-nav ml-auto my-3">
       <% if current_user.nil? %>
       <li class="nav-item p-2 mr-5 btn-light rounded">
-        <%= link_to '投稿フォーム', new_post_image_path,class: "text-decoration-none text-secondary" %></li>
-      <li class="nav-item p-2 mr-5 btn-light rounded">
-        <%= link_to '一覧ページ',post_images_path,class: "text-decoration-none text-secondary px-2" %></li>
+        <%= link_to "Sign up", new_user_path,class: "text-decoration-none text-secondary px-2" %></li>
       <li class="nav-item p-2 btn-light rounded">
-        <%= link_to "ログアウト", logout_path, method: :delete, class: "text-decoration-none text-secondary" %>
+         <%= link_to "Log in", login_path,class: "text-decoration-none text-secondary" %>
       </li>
 
       <% else %>

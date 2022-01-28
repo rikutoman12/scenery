@@ -1,18 +1,18 @@
 <div class=container>
   <div class="row">
-    <div class ="m-2">
-      <div class="table-bordered" >
-        <% @post_images.each do |post_image| %>
+    <% @post_images.each do |post_image| %>
+      <div class ="m-2">
+        <div class="table-bordered" >
           <%= link_to post_image_path(post_image) do %>
-            <%= attachment_image_tag post_image, :image, :size =>'300x260' %>
+            <%= attachment_image_tag post_image, :image, :size =>'360x290' %>
             <div class="text-center">
               <p>場所：<%= post_image.name %></p>
               <p>説明：<%= post_image.caption %></p>
             </div>
-          <%end%>
-        <%end%>
+            <%end%>
+        </div>
       </div>
-    </div>
+    <%end%>
   </div>
 </div>
 

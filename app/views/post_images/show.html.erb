@@ -1,28 +1,27 @@
 <div class=container>
   <div class="row">
     <div class ="m-2">
-
-        <%= attachment_image_tag @post_image, :image, :size =>'300x260' %>
+      <%= attachment_image_tag @post_image, :image, :size =>'500x460' %>
         <div class="text-center">
           <p>場所：<%= @post_image.name %></p>
           <p>説明：<%= @post_image.caption %></p>
+          <% if @post_image.user == current_user %>
+            <%= link_to "編集",edit_post_image_path(@post_image), class: "btn btn-sm btn-success" %>
+            <%= link_to "削除",post_image_path(@post_image),method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %>
+          <% end %>
         </div>
-        <%= link_to "編集",edit_post_image_path(@post_image) %>
-        <%= link_to "削除",post_image_path(@post_image),method: :delete  %>
-        <%= link_to "一覧画面",post_images_path %>
-      </div>
-    <div>
+    </div>
+    <div class = m-5>
       <% @post_image.post_comments.each do |post_comment| %>
-        <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
-        <% if post_comment.user == current_user %>
-    <div>
-      <%= link_to "削除", post_image_post_comment_path(post_comment.post_image, post_comment), method: :delete %>
-    </div>
-  <% end %>
+        <div class = m-2>
+          <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
+        </div>
+          <% if post_comment.user == current_user %>
+            <div class = m-2>
+              <%= link_to "削除", post_image_post_comment_path(post_comment.post_image, post_comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %>
+            </div>
+          <% end %>
       <% end %>
-
-    </div>
-    <div>
       <%= form_with(model:[@post_image, @post_comment], local: true) do |f| %>
         <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
         <%= f.submit "送信する" %>
